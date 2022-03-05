@@ -1,0 +1,16 @@
+[package]
+name = "migration"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+name = "migration"
+path = "src/lib.rs"
+
+[dependencies]
+futures = "0.3.21"
+itertools = "0.10.3"
+log = "0.4.14"
+sea-orm = { version = "0.6.0", default-features = false, features = [ "sqlx-postgres", "runtime-tokio-rustls" ] }
+sea-schema = { version = "0.5.1", default-features = false, features = [ "migration", "sqlx-postgres", "runtime-tokio-rustls" ] }

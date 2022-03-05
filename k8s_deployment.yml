@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: madome-library
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: madome-library
+    template:
+        metadata:
+            labels:
+                app: madome-library
+        spec:
+            containers:
+                - name: madome-library
+                  image: madome/library:{VERSION}
+                  imagePullPolicy: IfNotPresent
+                  resources:
+                      limits:
+                          memory: "512Mi"
+                          cpu: "500m"
+                  ports:
+                      - containerPort: 3112
+                        protocol: TCP
+                  env:
+                      - name: PORT
+                        value: "3112"
+                      - name: POSTGRES_HOST
+                        valueFrom:
+                            secretKeyRef:
+                                name: madome-library-secret
+                                key: postgres_host
+                      - name: POSTGRES_USER
+                        valueFrom:
+                            secretKeyRef:
+                                name: madome-library-secret
+                                key: postgres_user
+                      - name: POSTGRES_PW
+                        valueFrom:
+                            secretKeyRef:
+                                name: madome-library-secret
+                                key: postgres_pw
+                      - name: POSTGRES_DB
+                        valueFrom:
+                            secretKeyRef:
+                                name: madome-library-secret
+                                key: postgres_db
+                      - name: POSTGRES_PORT
+                        valueFrom:
+                            secretKeyRef:
+                                name: madome-library-secret
+                                key: postgres_port
+                      - name: MADOME_AUTH_URL
+                        valueFrom:
+                            secretKeyRef:
+                                name: madome-library-secret
+                                key: madome_auth_url

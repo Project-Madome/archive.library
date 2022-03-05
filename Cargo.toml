@@ -1,0 +1,37 @@
+[package]
+name = "madome-library"
+version = "0.1.1"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { version = "1.17", features = ["macros", "sync", "signal"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+async-trait = "0.1"
+hyper = { version = "0.14", features = ["server"] }
+uuid = { version = "0.8", features = ["v4", "v5"] }
+reqwest = { version = "0.11", features = ["json"] }
+sai = "0.1"
+thiserror = "1.0"
+dotenv = "0.15"
+chrono = { version = "0.4", features = ["serde"] }
+log = "0.4"
+simple_logger = "2.1"
+sea-orm = { version = "0.6", features = ["sqlx-postgres", "runtime-tokio-rustls", "macros", "sqlx-chrono"], default-features = false }
+openssl = { version = "0.10", features = ["vendored"] }
+itertools = "0.10"
+querystring = "1.1"
+serde_qs = "0.8"
+inspect = { git = "https://github.com/syrflover/inspect-rs" }
+util = { git = "https://github.com/syrflover/util-rs", tag = "0.2.8" }
+# util = { path = "../util" }
+# madome-sdk = { git = "https://github.com/Project-Madome/madome-sdk-rs", tag = "0.2.14", features = ["server"] }
+madome-sdk = { path = "../madome-sdk", features = ["server"] }
+parking_lot = "0.12"
+futures = "0.3"
+either = "1.6"
+
+[dev-dependencies]
+rand = "0.8"
